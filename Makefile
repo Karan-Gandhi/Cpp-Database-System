@@ -2,7 +2,7 @@ CC := g++
 CFLAGS := -Wall
 OBJS := obj/main.o obj/Schema.o obj/Database.o obj/Node.o
 
-all: compile
+all: clean compile run
 
 compile: ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} -o bin/main

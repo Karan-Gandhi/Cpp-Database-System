@@ -15,7 +15,6 @@ class Node {
 
         ~Node() {
             for (Node* child : children) delete child;
-            delete value;
             children.clear();
         }
 
