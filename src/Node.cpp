@@ -1,25 +1,29 @@
 #include <vector>
 #include <string>
 
-template <class T>
+// template <class T>
 class Node {
     public:
-        std::vector<Node> children;
         std::string id;
-        T value;
+        std::vector<Node*> children;
+        void* value;
 
     public:
-        Node(std::string _id): id(_id), children(std::vector<Node>()) {
+        Node(std::string _id, void* _value): id(_id), children(std::vector<Node*>()), value(_value) {
 
         }
 
-        void addChild(Node child) {
+        void set_value(void* _value) {
+            value = _value;
+        }
+
+        void add_child(Node* child) {
             children.push_back(child);
         }
 
-        bool hasChild(std::string child_id) {
-            for (Node node : children) {
-                if (node.id == child_id) return true;
+        bool has_child(std::string child_id) {
+            for (Node* node : children) {
+                if (node->id == child_id) return true;
             }
             return false;
         }
