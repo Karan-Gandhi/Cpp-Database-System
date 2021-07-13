@@ -13,6 +13,12 @@ class Node {
 
         }
 
+        ~Node() {
+            for (Node* child : children) delete child;
+            delete value;
+            children.clear();
+        }
+
         void set_value(void* _value) {
             value = _value;
         }
