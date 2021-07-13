@@ -1,11 +1,10 @@
 #include <iostream>
-
 #include "Database.cpp"
 
 int main() {
     Database* db = new Database("test");
     std::string data = "hello, world";
-    db->put_data("hello/world", &data);
+    db->put_data("hello/world", data);
 
     std::string* new_data = (std::string*) db->get_data("hello/world");
 

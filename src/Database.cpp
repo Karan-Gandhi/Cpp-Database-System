@@ -18,13 +18,14 @@ class Database {
             delete root;
         }
 
-        void put_data(std::string path, void* value) {
+        void put_data(std::string path, std::any& value) {
             // add Node
             Node* new_node = get_node_by_path(path, root);
             new_node->set_value(value);
         }
 
-        void* get_data(std::string path) {
+        // returns nullptr if there is no data at the given place
+        std::any& get_data(std::string path) {
             return get_node_by_path(path, root)->value;
         }
 

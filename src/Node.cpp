@@ -1,16 +1,17 @@
-#include<iostream>
+#include <iostream>
 #include <vector>
 #include <string>
+#include <any>
 
-// template <class T>
+
 class Node {
     public:
         std::string id;
         std::vector<Node*> children;
-        void* value;
+        std::any& value;
 
     public:
-        Node(std::string _id, void* _value): id(_id), children(std::vector<Node*>()), value(_value) {
+        Node(std::string _id, std::any& _value): id(_id), children(std::vector<Node*>()), value(_value) {
 
         }
 
@@ -19,7 +20,7 @@ class Node {
             children.clear();
         }
 
-        void set_value(void* _value) {
+        void set_value(std::any& _value) {
             value = _value;
         }
 
