@@ -11,7 +11,7 @@ class Database {
         std::string filename;
 
         Database(std::string _filename): root(new Node("root", nullptr)), filename(_filename) {
-
+            // Empty
         }
 
         ~Database() {

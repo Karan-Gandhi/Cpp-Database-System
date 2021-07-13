@@ -10,7 +10,7 @@ int main() {
     std::string* new_data = (std::string*) db->get_data("hello/world");
 
     std::cout << *new_data << std::endl;
-
+    
     delete db;
 
     return 0;
