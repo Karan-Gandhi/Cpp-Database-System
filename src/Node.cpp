@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 class Node {
     public:
@@ -34,4 +35,52 @@ class Node {
             }
             return false;
         }
+
+        void update_file(std::string filename) {
+            // FILE* file = fopen(filename.c_str(), "w");
+            // if (file == NULL) {
+            //     delete file;
+            //     return;
+            // }
+
+            // fwrite(&id, sizeof(id), 1, file);
+            // fwrite(&data_size, sizeof(data_size), 1, file);
+            // fwrite(value, data_size, 1, file);
+            // fclose(file);
+            // delete file;
+
+            std::ofstream ostream;
+            ostream.open(filename);
+            if (!ostream) return;
+
+            ostream << data_size;
+            ostream.write((char*) value, data_size);
+            ostream.close();            
+        }
+
+        void read_from_file(std::string filename) {
+            // FILE* file = fopen(filename.c_str(), "r");
+            // if (file == NULL) {
+            //     delete file;
+            //     return;
+            // }
+
+            // fread(&id, sizeof(std::string), 1, file);
+            // fread(&data_size, sizeof(size_t))
+            std::ifstream ifstream;
+            ifstream.open(filename);
+            if (!ifstream) return;
+
+            ifstream >> data_size;
+            char* buff = new char[data_size];
+            ifstream.read(buff, data_size);
+            value = buff;
+        }
+
+        // friend std::ostream& operator<< (std::ostream& os, const Node& node) {
+        //     os << node.id;
+        //     os << node.data_size;
+            
+        //     // std::fwrite(node.value, node.data_size, os);
+        // }
 };

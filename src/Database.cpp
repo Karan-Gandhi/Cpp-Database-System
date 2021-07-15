@@ -29,6 +29,10 @@ class Database {
             return get_node_by_path(path, root)->value;
         }
 
+        void update_database() {
+            
+        }
+
     private:
         Node* get_node_by_path(std::string path, Node* current_node) {
             int split_position = path.find_first_of("/");
