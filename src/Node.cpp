@@ -38,9 +38,10 @@ class Node {
 
         void update_file(std::string filename) {
             std::ofstream ostream;
-            ostream.open(filename);
+            ostream.open(filename, std::fstream::app);
             if (!ostream) return;
 
+            std::cout << id << std::endl;
             ostream << id << std::endl;
             ostream << data_size;
             ostream.write((char*) value, data_size);

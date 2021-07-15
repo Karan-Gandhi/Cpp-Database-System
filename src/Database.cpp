@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 #include "Node.cpp"
 
@@ -30,7 +31,14 @@ class Database {
         }
 
         void update_database() {
-            
+            std::ofstream os;
+            os.open(filename);
+            os << "";
+            root->update_file(filename);
+        }
+
+        void read_database() {
+            root->read_from_file(filename);
         }
 
     private:
