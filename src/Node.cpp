@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <any>
-
 
 class Node {
     public:
         std::string id;
         std::vector<Node*> children;
-        std::any& value;
+        void* value;
+        size_t data_size;
 
     public:
-        Node(std::string _id, std::any& _value): id(_id), children(std::vector<Node*>()), value(_value) {
+        Node(std::string _id, void* _value, size_t _data_size): id(_id), children(std::vector<Node*>()), value(_value), data_size(_data_size) {
 
         }
 
@@ -20,8 +19,9 @@ class Node {
             children.clear();
         }
 
-        void set_value(std::any& _value) {
-            value = _value;
+        void set_value(void* _value, size_t _data_size) {
+            value =_value;
+            data_size = _data_size;
         }
 
         void add_child(Node* child) {

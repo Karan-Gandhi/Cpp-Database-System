@@ -3,8 +3,8 @@
 
 int main() {
     Database* db = new Database("test");
-    std::string data = "hello, world";
-    db->put_data("hello/world", data);
+    std::string data = "hello, world, I am Karan";
+    db->put_data("hello/world", &data, sizeof (data));
 
     std::string* new_data = (std::string*) db->get_data("hello/world");
 

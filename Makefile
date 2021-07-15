@@ -1,6 +1,6 @@
 CC := g++
 CFLAGS := -Wall
-OBJS := obj/main.o obj/Schema.o obj/Database.o obj/Node.o
+OBJS := obj/main.o obj/Database.o obj/Node.o
 
 all: clean compile run
 
@@ -9,9 +9,6 @@ compile: ${OBJS}
 
 obj/main.o: src/main.cpp
 	${CC} ${CFLAGS} -c src/main.cpp -o obj/main.o
-
-obj/Schema.o: src/Schema.cpp
-	${CC} ${CFLAGS} -c src/Schema.cpp -o obj/Schema.o
 
 obj/Database.o: src/Database.cpp
 	${CC} ${CFLAGS} -c src/Database.cpp -o obj/Database.o

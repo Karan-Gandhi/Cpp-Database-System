@@ -10,7 +10,7 @@ class Database {
     public:
         std::string filename;
 
-        Database(std::string _filename): root(new Node("root", nullptr)), filename(_filename) {
+        Database(std::string _filename): root(new Node("root", nullptr, 0)), filename(_filename) {
             // Empty
         }
 
@@ -18,14 +18,14 @@ class Database {
             delete root;
         }
 
-        void put_data(std::string path, std::any& value) {
+        void put_data(std::string path, void* value, size_t size) {
             // add Node
             Node* new_node = get_node_by_path(path, root);
-            new_node->set_value(value);
+            new_node->set_value(value, 0);
         }
 
         // returns nullptr if there is no data at the given place
-        std::any& get_data(std::string path) {
+        void* get_data(std::string path) {
             return get_node_by_path(path, root)->value;
         }
 
@@ -38,7 +38,7 @@ class Database {
                     if (child->id == path) return child;
                 }
 
-                Node* new_node = new Node(path, nullptr);
+                Node* new_node = new Node(path, nullptr, 0);
                 current_node->add_child(new_node);
 
                 return new_node;
@@ -54,7 +54,7 @@ class Database {
             }
 
             // create the node and continue the search
-            Node* new_node = new Node(id_to_find, nullptr);
+            Node* new_node = new Node(id_to_find, nullptr, 0);
             current_node->add_child(new_node);
 
             return get_node_by_path(remaining_path, new_node);
