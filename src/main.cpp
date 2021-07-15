@@ -14,15 +14,15 @@ int main() {
     
     // delete db;
 
-    Node* node = new Node("node id", &data, sizeof data);
-    node->update_file("hello.bin");
+    // Node* node = new Node("node id", &data, sizeof data);
+    // node->update_file("hello.bin");
 
-    Node* new_node = new Node("", nullptr, 0);
-    new_node->read_from_file("hello.bin");    
+    // Node* new_node = new Node("", nullptr, 0);
+    // new_node->read_from_file("hello.bin");    
 
-    std::string* new_data = (std::string*) new_node->value;
+    // std::string* new_data = (std::string*) new_node->value;
 
-    std::cout << *new_data << std::endl;
+    // std::cout << *new_data << std::endl;
 
     return 0;
 }

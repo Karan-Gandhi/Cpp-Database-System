@@ -37,44 +37,42 @@ class Node {
         }
 
         void update_file(std::string filename) {
-            // FILE* file = fopen(filename.c_str(), "w");
-            // if (file == NULL) {
-            //     delete file;
-            //     return;
-            // }
-
-            // fwrite(&id, sizeof(id), 1, file);
-            // fwrite(&data_size, sizeof(data_size), 1, file);
-            // fwrite(value, data_size, 1, file);
-            // fclose(file);
-            // delete file;
-
             std::ofstream ostream;
             ostream.open(filename);
             if (!ostream) return;
 
+            ostream << id << std::endl;
             ostream << data_size;
             ostream.write((char*) value, data_size);
-            ostream.close();            
+            // write children
+            ostream << children.size() << std::endl;
+            for (Node* child : children) child->update_file(filename);
+
+            ostream.close();
         }
 
         void read_from_file(std::string filename) {
-            // FILE* file = fopen(filename.c_str(), "r");
-            // if (file == NULL) {
-            //     delete file;
-            //     return;
-            // }
-
-            // fread(&id, sizeof(std::string), 1, file);
-            // fread(&data_size, sizeof(size_t))
             std::ifstream ifstream;
             ifstream.open(filename);
             if (!ifstream) return;
 
+            std::getline(ifstream, id);
             ifstream >> data_size;
+            
             char* buff = new char[data_size];
+            
             ifstream.read(buff, data_size);
             value = buff;
+            
+            int number_of_children;
+            ifstream >> number_of_children;
+            for (int i = 0; i < number_of_children; i++) {
+                Node* child = new Node("", nullptr, 0);
+                child->read_from_file(filename);
+                children.push_back(child);
+            }
+            
+            ifstream.close();
         }
 
         // friend std::ostream& operator<< (std::ostream& os, const Node& node) {
