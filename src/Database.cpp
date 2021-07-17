@@ -22,7 +22,7 @@ class Database {
         void put_data(std::string path, void* value, size_t size) {
             // add Node
             Node* new_node = get_node_by_path(path, root);
-            new_node->set_value(value, 0);
+            new_node->set_value(value, size);
         }
 
         // returns nullptr if there is no data at the given place
@@ -43,6 +43,10 @@ class Database {
 
     private:
         Node* get_node_by_path(std::string path, Node* current_node) {
+            if (path == "") {
+                return current_node;
+            }
+            
             int split_position = path.find_first_of("/");
             if (int64_t(split_position) == -1) {
                 // search among the children for the id

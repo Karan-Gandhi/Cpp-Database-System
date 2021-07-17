@@ -41,9 +41,8 @@ class Node {
             ostream.open(filename, std::fstream::app);
             if (!ostream) return;
 
-            std::cout << id << std::endl;
             ostream << id << std::endl;
-            ostream << data_size;
+            ostream << data_size << std::endl;
             ostream.write((char*) value, data_size);
             // write children
             ostream << children.size() << std::endl;
@@ -59,12 +58,16 @@ class Node {
 
             std::getline(ifstream, id);
             ifstream >> data_size;
-            
             char* buff = new char[data_size];
+
+            std::cout << id << std::endl;
+            if (!data_size) goto read_children;
+            std::cout << data_size << std::endl;
             
             ifstream.read(buff, data_size);
             value = buff;
             
+            read_children:
             int number_of_children;
             ifstream >> number_of_children;
             for (int i = 0; i < number_of_children; i++) {
@@ -75,11 +78,4 @@ class Node {
             
             ifstream.close();
         }
-
-        // friend std::ostream& operator<< (std::ostream& os, const Node& node) {
-        //     os << node.id;
-        //     os << node.data_size;
-            
-        //     // std::fwrite(node.value, node.data_size, os);
-        // }
 };
